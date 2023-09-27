@@ -1,0 +1,58 @@
+[
+    {
+        "nom": "Sputnik",
+        "any": 1957,
+        "pais": "Russia",
+        "descripcio": "El primer satèl·lit artificial",
+        "imatge": "sputnik.jpeg"
+    },
+    {
+        "nom": "Soyuz",
+        "any": 1966,
+        "pais": "Russia",
+        "descripcio": "El primer coet espacial tripulat",
+        "imatge": "soyuz.jpeg"
+    },
+    {
+        "nom": "Meteosat",
+        "any": 1977,
+        "pais": "Europa",
+        "descripcio": "El primer satèl·lit meteorològic",
+        "imatge": "meteosat.jpeg"
+    },
+    {
+        "nom": "Ariane",
+        "any": 1980,
+        "pais": "Europa",
+        "descripcio": "El primer coet espacial comercial",
+        "imatge": "ariane.jpg"
+    },
+    {
+        "nom": "Spatnik",
+        "any": 1999,
+        "pais": "Rusia",
+        "descripcio": "Es ruso ns",
+        "imatge": "7f5327b6-a039-4668-831b-397fdc82708f.jpeg"
+    },
+    {
+        "nom": "SPA",
+        "any": 1999,
+        "pais": "Rusia",
+        "descripcio": "Es rusia ns",
+        "imatge": "90d3081b-2803-49ac-b3ea-7488addba317.jpeg"
+    },
+    {
+        "id": 11,
+        "nom": "aaa",
+        "preu": 20,
+        "descripcio": "aaaa",
+        "imatge": "5835334f-7e30-4923-bc3c-cb65015b2669.jpg"
+    },
+    {
+        "nom": "aaa",
+        "any": 1999,
+        "pais": "España",
+        "descripcio": "aaa",
+        "imatge": "/2d73ed78-0e62-4265-8c8a-5fc8812b645b.jpeg"
+    }
+]

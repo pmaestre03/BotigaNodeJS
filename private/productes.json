@@ -1,0 +1,79 @@
+[
+    {
+        "id": 1,
+        "nom": "Ariane",
+        "preu": 20,
+        "descripcio": "Cobete barato",
+        "imatge": "ariane.jpg"
+    },
+    {
+        "id": 2,
+        "nom": "3ds",
+        "preu": 100,
+        "descripcio": "Nintendo 3ds",
+        "imatge": "3ds.jpg"
+    },
+    {
+        "id": 3,
+        "nom": "PS4",
+        "preu": 200,
+        "descripcio": "Consola PS4",
+        "imatge": "ps4.jpg"
+    },
+    {
+        "id": 4,
+        "nom": "Nintendo Switch",
+        "preu": 250,
+        "descripcio": "Nintendo Switch",
+        "imatge": "nswitch.jpg"
+    },
+    {
+        "id": 5,
+        "nom": "Xbox Series S",
+        "preu": 350,
+        "descripcio": "Consola Xbox Series S con 1TB de almacenamiento",
+        "imatge": "seriesS.jpg"
+    },
+    {
+        "id": 6,
+        "nom": "Xbox Series X",
+        "preu": 500,
+        "descripcio": "Consola Xbox Series X con 1TB de almacenamiento",
+        "imatge": "seriesX.jpg"
+    },
+    {
+        "id": 7,
+        "nom": "Meta Quest 2",
+        "preu": 350,
+        "descripcio": "Gafas de realidad virtual de 256gb de almacenamiento",
+        "imatge": "quest2.jpg"
+    },
+    {
+        "id": 8,
+        "nom": "PS5",
+        "preu": 550,
+        "descripcio": "Consola PS5 digital con 1tb de almacenamiento",
+        "imatge": "ps5.jpg"
+    },
+    {
+        "id": 9,
+        "nom": "Ordenador Gaming",
+        "preu": 950,
+        "descripcio": "Ordenador Gaming con 3060 e I5-12400F",
+        "imatge": "ordenador.jpg"
+    },
+    {
+        "id": 10,
+        "nom": "Ariane",
+        "preu": 20,
+        "descripcio": "Cobete barato",
+        "imatge": "ariane.jpg"
+    },
+    {
+        "id": 11,
+        "nom": "aaa",
+        "preu": 20,
+        "descripcio": "aaaa",
+        "imatge": "57ac3b21-df25-4dd7-b5b1-0e3b34aef6a6.jpg"
+    }
+]

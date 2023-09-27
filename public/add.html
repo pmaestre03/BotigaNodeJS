@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
+        <link href="/style.css" rel="stylesheet">
+        <title>Afegir un nou producte</title>
+    </head>
+    <body>
+
+        <div style="border-color: black;border-width: 2px;border-style: solid;margin-top: 150;margin-left: 700;margin-right: 700; background-color: cornflowerblue;">
+            <div style="text-align: center;">
+                <br>
+                <input type="submit" value="Inici">
+                <input type="submit" value="Afegir un nou producte" disabled>
+            </div>
+            <div style="text-align: center;">
+                <br>
+                <hr>
+                <p>Afegir un nou producte:</p>
+                
+                <form method="post" action="/add" enctype="multipart/form-data">
+                    <br>
+                    <div class="formRow">Nom: <input type="text" name="nom" /></div><br>
+                    <div class="formRow">Preu: <input type="text" name="preu" /></div><br>
+                    <div class="formRow">Descripció: <textarea type="text" name="descripcio"></textarea></div><br>
+                    <div class="formRow">Imatge:<input type="file" name="files"></div><br>
+                    <div class="formRow"><input type="submit" value="Afegir"></div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
