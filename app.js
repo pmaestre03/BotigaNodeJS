@@ -1,9 +1,10 @@
 const express = require('express')
 const app = express()
 const url = require('url')
-const port = 3000
+const port = 3030
 const ejs = require('ejs')
 const fs = require('fs/promises')
+const { log } = require('console')
 app.set('view engine', 'ejs')
 
 // Configurar el motor de plantilles
@@ -18,16 +19,15 @@ async function getProd(req, res) {
   let query = url.parse(req.url, true).query;
   let id = []
   let nom = []
+  let id_nom = []
     try {
         let dadesArxiu = await fs.readFile("./private/productes.json", { encoding: 'utf8' })
-        console.log(dadesArxiu)
         let dades = JSON.parse(dadesArxiu)
-        console.log(dades)  
         let infoProd = dades.find(prod => prod.nom)
         if (infoProd) {
-            nom = dades.map(prod => {return prod.nom})
+            nom = dades.map(prod => {return prod.nom} )
             id = dades.map(prod => {return prod.id})
-            res.render('sites/list', {llista: id})
+            res.render('sites/list', {llista: nom})
         }
     }
     catch (error) {
@@ -38,7 +38,22 @@ async function getProd(req, res) {
 
 app.get('/edit',getEdit)
 async function getEdit(req,res) {
-
+    let query = url.parse(req.url, true).query;
+    try {
+        let dadesArxiu = await fs.readFile("./private/productes.json", { encoding: 'utf8' })
+        let dades = JSON.parse(dadesArxiu)
+        console.log(dades) 
+        let infoProd = dades.find(prod => (prod.nom == query.nom))
+        if (infoProd) {
+            res.render('sites/products', {infoProd: infoProd})
+        }
+        else {
+            res.send('Paràmetres incorrectes')
+          }
+    } catch (error) {
+        console.log(error)
+        res.send('Incorrecto')
+    }
 }
 
 
