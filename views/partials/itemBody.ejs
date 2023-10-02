@@ -1,10 +1,16 @@
-<p>
-    <%= infoProd.id %>
-</p>
-<p><%= infoProd.nom %></h3>
-<p>
-    <%= infoProd.preu %>
-</p>
-<p>
-    <%= infoProd.descripcio %>
-</p>
+
+    <p>
+        <%= infoProd.id %>
+    </p>
+    <p><%= infoProd.nom %></h3>
+    <p>
+        <%= infoProd.preu %>
+    </p>
+    <p>
+        <%= infoProd.descripcio %>
+    </p>
+    <img src="<%= infoProd.imatge %>" alt="" height="220" width="220">
+<form action="/delete">
+    <br><input type="submit" name="delete" value="delete">
+    
+</form>

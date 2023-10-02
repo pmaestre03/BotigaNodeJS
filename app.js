@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const url = require('url')
-const port = 3030
+const port = 3000
 const ejs = require('ejs')
 const fs = require('fs/promises')
 const { log } = require('console')
@@ -25,9 +25,9 @@ async function getProd(req, res) {
         let dades = JSON.parse(dadesArxiu)
         let infoProd = dades.find(prod => prod.nom)
         if (infoProd) {
-            nom = dades.map(prod => {return prod.nom} )
+            nom = dades.map(prod => {return prod.nom})
             id = dades.map(prod => {return prod.id})
-            res.render('sites/list', {llista: nom})
+            res.render('sites/list', {llistaId: id,llistaNom: nom})
         }
     }
     catch (error) {
@@ -43,7 +43,7 @@ async function getEdit(req,res) {
         let dadesArxiu = await fs.readFile("./private/productes.json", { encoding: 'utf8' })
         let dades = JSON.parse(dadesArxiu)
         console.log(dades) 
-        let infoProd = dades.find(prod => (prod.nom == query.nom))
+        let infoProd = dades.find(prod => (prod.id == query.id))
         if (infoProd) {
             res.render('sites/products', {infoProd: infoProd})
         }
@@ -62,6 +62,19 @@ async function getAdd(req, res) {
     res.send('Add product')
 }
 
+app.get('/delete',getDelete)
+async function getDelete(req,res) {
+    let arxiu = "./private/coets.json"
+    let postData = await getPostObject(req)
+    try {
+        // Llegir el fitxer JSON
+        let dadesArxiu = await fs.readFile(arxiu, { encoding: 'utf8' })
+        let dades = JSON.parse(dadesArxiu)
+    } catch (error) {
+        console.error(error)
+        res.send('Error al afegir les dades')
+      }
+}
 // Activar el servidor
 const httpServer = app.listen(port, appListen)
 function appListen() {
