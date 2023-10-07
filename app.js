@@ -22,8 +22,6 @@ async function getProd(req, res) {
     let id_nom = []
     try {
         let dadesArxiu = await fs.readFile("./private/productes.json", { encoding: 'utf8' })
-        
-        
         let dades = JSON.parse(dadesArxiu)
         if (dades.length === 0) {
             res.send('No products')
@@ -50,7 +48,7 @@ async function getEdit(req, res) {
         let dades = JSON.parse(dadesArxiu)
         let infoProd = dades.find(prod => (prod.id == query.id))
         if (infoProd) {
-            res.render('sites/products', { infoProd: infoProd })
+            res.render('sites/products_edit', { infoProd: infoProd })
         }
         else {
             res.send('Paràmetres incorrectes')
@@ -69,7 +67,26 @@ async function getAdd(req, res) {
 
 app.get('/delete', getDelete)
 async function getDelete(req, res) {
-    
+    let query = url.parse(req.url, true).query;
+    try {
+        
+        let dadesArxiu = await fs.readFile("./private/productes.json", { encoding: 'utf8' })
+        let dades = JSON.parse(dadesArxiu)
+        let infoProd = dades.find(prod => (prod.id == query.id))
+        if (infoProd) {
+            res.render('sites/products_delete', { infoProd: infoProd })
+        }
+        else {
+            res.send('Paràmetres incorrectes')
+        }
+    } catch (error) {
+        console.log(error)
+        res.send('Incorrecto')
+    }
+}
+
+app.get ('/actionDelete', getActionDelete)
+async function getActionDelete(req,res) {
     let arxiu = "./private/productes.json"
     let query = url.parse(req.url, true).query;
     try {
