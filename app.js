@@ -6,6 +6,10 @@ const ejs = require('ejs')
 const fs = require('fs').promises
 const { log } = require('console')
 app.set('view engine', 'ejs')
+const multer = require('multer')
+const { v4: uuidv4 } = require('uuid')
+const storage = multer.memoryStorage() 
+const upload = multer({ storage: storage })
 
 // Configurar el motor de plantilles
 app.set('view engine', 'ejs')
@@ -25,14 +29,14 @@ async function getProd(req, res) {
         let dades = JSON.parse(dadesArxiu)
         if (dades.length === 0) {
             res.send('No products')
-            
+
         }
         let infoProd = dades.find(prod => prod.nom)
         if (infoProd) {
             nom = dades.map(prod => { return prod.nom })
             id = dades.map(prod => { return prod.id })
             res.render('sites/list', { llistaId: id, llistaNom: nom })
-        } 
+        }
     }
     catch (error) {
         console.error(error)
@@ -59,17 +63,28 @@ async function getEdit(req, res) {
     }
 }
 
-
-app.get('/add', getAdd)
-async function getAdd(req, res) {
-    res.send('Add product')
+app.get('/actionEdit', postActionEdit)
+async function postActionEdit(req, res) {
+    let arxiu = "./private/productes.json"
+    let query = url.parse(req.url, true).query;
+    try {
+        let dadesArxiu = await fs.readFile(arxiu, { encoding: 'utf8' })
+        let dades = JSON.parse(dadesArxiu)
+        console.log(dades)
+        var editedProduct = {id: query.id, nom: query.nom, preu: query.preu, descripcio: query.descripcio}
+        dades = dades.map(p => p.id !== editedProduct.id ? p : editedProduct)
+        console.log(dades)
+        res.redirect('/')
+    } catch (error) {
+        console.log(error)
+        res.send('Incorrecto')
+    }
 }
 
 app.get('/delete', getDelete)
 async function getDelete(req, res) {
     let query = url.parse(req.url, true).query;
     try {
-        
         let dadesArxiu = await fs.readFile("./private/productes.json", { encoding: 'utf8' })
         let dades = JSON.parse(dadesArxiu)
         let infoProd = dades.find(prod => (prod.id == query.id))
@@ -85,8 +100,8 @@ async function getDelete(req, res) {
     }
 }
 
-app.get ('/actionDelete', getActionDelete)
-async function getActionDelete(req,res) {
+app.get('/actionDelete', getActionDelete)
+async function getActionDelete(req, res) {
     let arxiu = "./private/productes.json"
     let query = url.parse(req.url, true).query;
     try {

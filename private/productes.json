@@ -1,12 +1,5 @@
 [
     {
-        "id": 1,
-        "nom": "Wii",
-        "preu": 40,
-        "descripcio": "Consola Wii",
-        "imatge": "/images/wii.jpg"
-    },
-    {
         "id": 2,
         "nom": "3ds",
         "preu": 100,
