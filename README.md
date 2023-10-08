@@ -2,8 +2,6 @@
 Producto final de tienda con NodeJS
 
 
-Delete
-
 Edit
 
 Convertir html en ejs
