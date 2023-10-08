@@ -1,19 +1,21 @@
-<p>
-    Esborrar el producte amb id <%= infoProd.id %>
-</p>
-<p>
-    <%= infoProd.nom %>
-</p>
-<p>
-    <%= infoProd.preu %>
-</p>
-<p>
-    <%= infoProd.descripcio %>
-</p>
-<p>
-    <img src="<%= infoProd.imatge %>" alt="" height="220" width="220">
-</p>
+<div class="formRow" id="contenedor">
+    <p>
+        Esborrar el producte amb id <%= infoProd.id %>
+    </p>
+    <p>
+        <%= infoProd.nom %>
+    </p>
+    <p>
+        <%= infoProd.preu %>
+    </p>
+    <p>
+        <%= infoProd.descripcio %>
+    </p>
+    <p>
+        <img src="<%= infoProd.imatge %>" alt="" height="220" width="220">
+    </p>
 
-<form action="/actionDelete">
-    <br><button name="id" value="<%= infoProd.id %>">Delete</button>
-</form>
+    <form action="/actionDelete">
+        <BR></BR><button name="id" value="<%= infoProd.id %>">Delete</button>
+    </form>
+</div>

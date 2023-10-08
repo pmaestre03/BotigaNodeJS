@@ -1,14 +1,18 @@
-<form action="/actionEdit">
-    <p>
-        <%= infoProd.id %>
-    </p>
-    Nom: <input type="text" name="nom" value="<%= infoProd.nom %>"> <br><br> 
-    Preu: <input type="number" name="preu" value="<%= infoProd.preu %>"> <br><br>
-    Descripcio: <input type="text" name="descripcio" value="<%= infoProd.descripcio %>"> <br><br>
-    <img src="<%= infoProd.imatge %>" alt="" height="220" width="220">
-
-    <br><button name="id" value="<%= infoProd.id %>">Edit</button>
-</form>
-<form action="/delete">    
-    <br><button name="id" value="<%= infoProd.id %>">Delete</button>
-</form>
+<div class="formRow" id="contenedor">
+    <form method="post" action="http:/actionEdit?id=<%= infoProd.id %>" enctype="multipart/form-data">
+        <h3>Editar producte:</h3>
+        ID: <input type="text" name="id" id="id" value="<%= infoProd.id %>" readonly> <br><br>
+        Nom: <input type="text" name="nom" value="<%= infoProd.nom %>"> <br><br>
+        Preu: <input type="number" name="preu" value="<%= infoProd.preu %>"> <br><br>
+        Descripcio: <input type="text" name="descripcio" value="<%= infoProd.descripcio %>"> <br><br>
+        <img src="<%= infoProd.imatge %>" alt="" height="220" width="220"><br><br>
+        <input id="foto" type="file" name="foto" accept="image/jpg, image/png, image/webp"><br>
+        <div class="formRow">
+            <input type="submit" value="Guardar Cambios">
+        </div>
+    </form>
+    <form action="/delete">
+        <button name="id" value="<%= infoProd.id %>">Delete</button>
+    </form>
+</div>
+</div>

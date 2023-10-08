@@ -11,6 +11,15 @@ Aquest arxiu rep una llista amb noms de naus
 </head>
 
 <body>
+    <div class="formRow" id="cabecera">
+        <br>
+        <form action="/" >
+            <input type="submit" value="Inici" disabled>
+        </form>
+        <form action="/add">
+            <input type="submit" value="Afegir un nou producte">
+        </form>
+    </div>
     <!-- Al parcial de 'itemBody' li fa falta la informació que hem rebut -->
     <%- include('../partials/listProducts', { llistaId: llistaId }); %>
 </body>

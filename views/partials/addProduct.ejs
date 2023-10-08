@@ -1,0 +1,23 @@
+<div class="formRow" id="cabecera">
+    <br>
+    <form action="/">
+        <input type="submit" value="Inici">
+    </form>
+    <form action="/actionAdd">
+        <input type="submit" value="Afegir un nou producte" disabled>
+    </form>
+</div>
+
+<div class="formRow" id="contenedor">
+    <br>
+    <p>Afegir un nou producte:</p>
+    
+    <form method="post" action="/actionAdd" enctype="multipart/form-data">
+        <br>
+        <div class="formRow">Nom: <input type="text" name="nom" /></div><br>
+        <div class="formRow">Preu: <input type="number" name="preu" /></div><br>
+        <div class="formRow">Descripció: <textarea type="text" name="descripcio"></textarea></div><br>
+        <div class="formRow">Imatge:<input type="file" name="files"></div><br>
+        <div class="formRow"><input type="submit" value="Afegir"></div>
+    </form>
+</div>

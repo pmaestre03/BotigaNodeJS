@@ -8,7 +8,7 @@ const { log } = require('console')
 app.set('view engine', 'ejs')
 const multer = require('multer')
 const { v4: uuidv4 } = require('uuid')
-const storage = multer.memoryStorage() 
+const storage = multer.memoryStorage()
 const upload = multer({ storage: storage })
 
 // Configurar el motor de plantilles
@@ -44,40 +44,134 @@ async function getProd(req, res) {
     }
 }
 
-app.get('/edit', getEdit)
-async function getEdit(req, res) {
+app.get('/add', getAdd)
+async function getAdd(req, res) {
     let query = url.parse(req.url, true).query;
     try {
         let dadesArxiu = await fs.readFile("./private/productes.json", { encoding: 'utf8' })
         let dades = JSON.parse(dadesArxiu)
-        let infoProd = dades.find(prod => (prod.id == query.id))
-        if (infoProd) {
-            res.render('sites/products_edit', { infoProd: infoProd })
-        }
-        else {
-            res.send('Paràmetres incorrectes')
-        }
+        res.render('sites/products_add')
     } catch (error) {
         console.log(error)
         res.send('Incorrecto')
     }
+
 }
 
-app.get('/actionEdit', postActionEdit)
-async function postActionEdit(req, res) {
+app.post('/actionAdd', upload.array('files'), actionAdd)
+async function actionAdd(req, res) {
     let arxiu = "./private/productes.json"
-    let query = url.parse(req.url, true).query;
+    let postData = await getPostObject(req)
     try {
+        // Llegir el fitxer JSON
         let dadesArxiu = await fs.readFile(arxiu, { encoding: 'utf8' })
         let dades = JSON.parse(dadesArxiu)
-        console.log(dades)
-        var editedProduct = {id: query.id, nom: query.nom, preu: query.preu, descripcio: query.descripcio}
-        dades = dades.map(p => p.id !== editedProduct.id ? p : editedProduct)
-        console.log(dades)
+        let max = Math.max(...dades.map(dades => dades.id))
+        console.log(max)
+
+        // Guardem la imatge a la carpeta 'public' amb un nom únic
+        if (postData.files && postData.files.length > 0) {
+            let fileObj = postData.files[0];
+            const uniqueID = uuidv4()
+            const fileExtension = fileObj.name.split('.').pop()
+            let filePath = `${uniqueID}.${fileExtension}`
+            await fs.writeFile('./public/images/' + filePath, fileObj.content);
+            // Guardem el nom de l'arxiu a la propietat 'imatge' de l'objecte
+            postData.imatge = filePath;
+            console.log(postData.files)
+            // Eliminem el camp 'files' perquè no es guardi al JSON
+            delete postData.files;
+            postData.id = max + 1;
+        }
+        dades.push(postData) // Afegim el nou objecte (que ja té el nou nom d’imatge)
+        let textDades = JSON.stringify(dades, null, 4) // Ho transformem a cadena de text (per guardar-ho en un arxiu)
+        await fs.writeFile(arxiu, textDades, { encoding: 'utf8' }) // Guardem la informació a l’arxiu
         res.redirect('/')
     } catch (error) {
-        console.log(error)
-        res.send('Incorrecto')
+        console.error(error)
+        res.send('Error al afegir les dades')
+    }
+}
+
+
+async function getPostObject(req) {
+    return new Promise(async (resolve, reject) => {
+        let objPost = {};
+        if (req.files.length > 0) {
+            objPost.files = [];
+        }
+        req.files.forEach((file) => {
+            objPost.files.push({ name: file.originalname, content: file.buffer });
+        });
+        for (let key in req.body) {
+            let value = req.body[key];
+            if (!isNaN(value)) {
+                let valueInt = parseInt(value);
+                let valueFlt = parseFloat(value);
+                if (valueInt && valueFlt) {
+                    if (valueInt == valueFlt) objPost[key] = valueInt;
+                    else objPost[key] = valueFlt;
+                }
+            } else {
+                objPost[key] = value;
+            }
+        }
+        resolve(objPost);
+    });
+}
+
+app.get("/edit", getItem);
+async function getItem(req, res) {
+    let arxiu = "./private/productes.json";
+    let dadesArxiu = await fs.readFile(arxiu, { encoding: "utf8" });
+    let dades = JSON.parse(dadesArxiu);
+    let query = url.parse(req.url, true).query;
+    // Buscar el producto por id
+    let infoProd = dades.find((prod) => prod.id == query.id);
+    if (infoProd) {
+        // Retornar la página según el producto encontrado
+        res.render("sites/products_edit", { id: query.id, infoProd });
+    } else {
+        res.send("Parámetros incorrectos");
+    }
+}
+
+app.post('/actionEdit', upload.array('foto', 1), getActionEdit);
+async function getActionEdit(req, res) {
+    let arxiu = "./private/productes.json";
+    let postData = await getPostObject(req);
+    try {
+        // Llegir el fitxer JSON
+        let dadesArxiu = await fs.readFile(arxiu, { encoding: 'utf8' })
+        let dades = JSON.parse(dadesArxiu)
+
+        
+        // Guardem la imatge a la carpeta 'public' amb un nom únic
+        if (postData.files && postData.files.length > 0) {
+            let fileObj = postData.files[0];
+            const uniqueID = uuidv4()
+            const fileExtension = fileObj.name.split('.').pop()
+            let filePath = `${uniqueID}.${fileExtension}`
+            await fs.writeFile('./public/images/' + filePath, fileObj.content);
+            // Guardem el nom de l'arxiu a la propietat 'imatge' de l'objecte
+            postData.imatge = filePath;
+            // Eliminem el camp 'files' perquè no es guardi al JSON
+            delete postData.files;
+        }
+        /*
+        console.log(postData)
+        for (let i = 0; i < dades.length; i++) {
+            if (dades[i].id == postData.id) {
+                await fs.unlink("./public/images/" + dades[i].image)
+                dades[i] = postData; 
+            }
+        }*/
+        let textDades = JSON.stringify(dades, null, 4);
+        await fs.writeFile(arxiu, textDades, { encoding: "utf8" }); 
+        res.redirect("/");
+    } catch (error) {
+        console.error(error);
+        res.send("Error al afegir les dades");
     }
 }
 
@@ -131,4 +225,3 @@ function shutDown() {
     httpServer.close()
     process.exit(0);
 }
-

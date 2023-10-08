@@ -7,7 +7,18 @@
 </head>
 
 <body>
+    <div class="formRow" id="cabecera">
+        <br>
+        <form action="http://localhost:3000">
+            <input type="submit" value="Inici">
+        </form>
+        <form action="/add">
+            <input type="submit" value="Afegir un nou producte">
+        </form>
+    </div>
+
     <%- include('../partials/deleteProducts', { infoProd: infoProd }); %>
+    
 </body>
 
 </html>
