@@ -1,0 +1,14 @@
+<form action="/actionEdit">
+    <p>
+        <%= infoProd.id %>
+    </p>
+    Nom: <input type="text" name="nom" value="<%= infoProd.nom %>"> <br><br> 
+    Preu: <input type="number" name="preu" value="<%= infoProd.preu %>"> <br><br>
+    Descripcio: <input type="text" name="descripcio" value="<%= infoProd.descripcio %>"> <br><br>
+    <img src="<%= infoProd.imatge %>" alt="" height="220" width="220">
+
+    <br><button name="id" value="<%= infoProd.id %>">Edit</button>
+</form>
+<form action="/delete">    
+    <br><button name="id" value="<%= infoProd.id %>">Delete</button>
+</form>
