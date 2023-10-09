@@ -2,11 +2,11 @@
     <form method="post" action="http:/actionEdit?id=<%= infoProd.id %>" enctype="multipart/form-data">
         <h3>Editar producte:</h3>
         ID: <input type="text" name="id" id="id" value="<%= infoProd.id %>" readonly> <br><br>
-        Nom: <input type="text" name="nom" value="<%= infoProd.nom %>"> <br><br>
-        Preu: <input type="number" name="preu" value="<%= infoProd.preu %>"> <br><br>
-        Descripcio: <input type="text" name="descripcio" value="<%= infoProd.descripcio %>"> <br><br>
+        Nom: <input type="text" name="nom" value="<%= infoProd.nom %>" required autocomplete="off"> <br><br>
+        Preu: <input type="number" name="preu" value="<%= infoProd.preu %>" required autocomplete="off"> <br><br>
+        Descripcio: <input type="text" name="descripcio" value="<%= infoProd.descripcio %>" required autocomplete="off"> <br><br>
         <img src="<%= infoProd.imatge %>" alt="" height="220" width="220"><br><br>
-        <input id="foto" type="file" name="foto" accept="image/jpg, image/png, image/webp"><br>
+        <input id="foto" type="file" name="foto" accept="image/jpg, image/png, image/webp" required autocomplete="off"><br>
         <div class="formRow">
             <input type="submit" value="Guardar Cambios">
         </div>
