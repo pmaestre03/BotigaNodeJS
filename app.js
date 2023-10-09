@@ -77,7 +77,7 @@ async function actionAdd(req, res) {
             let filePath = `${uniqueID}.${fileExtension}`
             await fs.writeFile('./public/images/' + filePath, fileObj.content);
             // Guardem el nom de l'arxiu a la propietat 'imatge' de l'objecte
-            postData.imatge = filePath;
+            postData.imatge = '/images/'+filePath;
             console.log(postData.files)
             // Eliminem el camp 'files' perquè no es guardi al JSON
             delete postData.files;
@@ -154,18 +154,17 @@ async function getActionEdit(req, res) {
             let filePath = `${uniqueID}.${fileExtension}`
             await fs.writeFile('./public/images/' + filePath, fileObj.content);
             // Guardem el nom de l'arxiu a la propietat 'imatge' de l'objecte
-            postData.imatge = filePath;
+            postData.imatge = '/images/'+filePath;
             // Eliminem el camp 'files' perquè no es guardi al JSON
             delete postData.files;
         }
-        /*
+        
         console.log(postData)
         for (let i = 0; i < dades.length; i++) {
             if (dades[i].id == postData.id) {
-                await fs.unlink("./public/images/" + dades[i].image)
                 dades[i] = postData; 
             }
-        }*/
+        }
         let textDades = JSON.stringify(dades, null, 4);
         await fs.writeFile(arxiu, textDades, { encoding: "utf8" }); 
         res.redirect("/");
