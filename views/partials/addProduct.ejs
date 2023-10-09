@@ -14,10 +14,10 @@
     
     <form method="post" action="/actionAdd" enctype="multipart/form-data">
         <br>
-        <div class="formRow">Nom: <input type="text" name="nom" /></div><br>
-        <div class="formRow">Preu: <input type="number" name="preu" /></div><br>
-        <div class="formRow">Descripció: <textarea type="text" name="descripcio"></textarea></div><br>
-        <div class="formRow">Imatge:<input type="file" name="files"></div><br>
+        <div class="formRow">Nom: <input type="text" name="nom" required autocomplete="off"/></div><br>
+        <div class="formRow">Preu: <input type="number" name="preu" required autocomplete="off"/></div><br>
+        <div class="formRow">DescripciÃ³: <textarea type="text" name="descripcio" required autocomplete="off"></textarea></div><br>
+        <div class="formRow">Imatge:<input type="file" name="files" required autocomplete="off"></div><br>
         <div class="formRow"><input type="submit" value="Afegir"></div>
     </form>
 </div>
